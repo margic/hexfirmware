@@ -10,10 +10,8 @@
 // pin should be on for 12,000 then off for 148,000
 // Should fire interrupt in firmware on change
 $repeat 100
-	PINB = 0x1
-	//$break
+	PORTB |= 1
 	#12000
-	PINB = 0x0
+	PORTB = 0
 	#148000
-	//$break
 $endrep

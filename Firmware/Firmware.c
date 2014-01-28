@@ -12,16 +12,18 @@
 #include <util/delay.h>
 #include "i2cslave.h"
 
+void PWM_init(void);
+void TWI_init(void);
+
 int main(void)
 {
-	
+	PWM_init();
 	TWI_init();
 	// allow interrupts
 	sei();	
 	while(1)
     {
-        //_delay_ms(1);
-		//TODO:: Please write your application code 
+		//loop
     }
 }
 
@@ -32,7 +34,7 @@ void PWM_init(void){
 	// enable pin change interrupt PCINT0-7
 	PCICR |= (1<<PCIE0);
 	// set pin 0 individually
-	PCMSK0 |= (1<<PCINT0);
+	PCMSK0 |= (1<<PCINT0);	
 }
 
 void TWI_init(void)
