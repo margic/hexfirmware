@@ -32,9 +32,19 @@ void PWM_init(void){
 	// set pin 0 or port b as input pin
 	DDRB |= (1<<PINB0);	
 	// enable pin change interrupt PCINT0-7
-	PCICR |= (1<<PCIE0);
+	// PCICR |= (1<<PCIE0); // replace with input capture
 	// set pin 0 individually
-	PCMSK0 |= (1<<PCINT0);	
+	// PCMSK0 |= (1<<PCINT0);
+	
+	// enable input noise cancelling filter
+	TCCR1B |= (1<<ICNC1); // adds 4 clock cycle delay to sample over 4 additional cycles
+	// enable input capture on leading edge of ICP1
+	TCCR1B |= (1<<ICES1);	
+	// set timer prescaler to 1 for 2ms pulse counter at 8mhz
+	TCCR1B |= (1<<CS10);
+	// enable interrupt
+	TIMSK1 |= (1<<ICIE1);
+	
 }
 
 void TWI_init(void)
@@ -51,10 +61,19 @@ void TWI_stop(void){
 	TWCR &= ~( (1<<TWEA) | (1<<TWEN) );
 }
 
-ISR(PCINT0_vect){
-	// pin change interrupt called
-	// read value of PortB bit 0
-	uint8_t curVal = PORTB;
+ISR(TIMER1_CAPT_vect){
+	// Input capture interrupt handler
+	// first time is triggered in leading edge
+	if(PORTB & (0b00000001)){ // pin high 
+		// clear counter and set to trailing edge
+		TCNT1 = 0;
+		TCCR1B &= ~(1<<ICES1);
+	}else{
+		// get counter from ICR1
+		// reset to look for leading edge
+		uint_fast16_t curVal = ICR1;
+		TCCR1B |= (1<<ICES1);  
+	}
 }
 
 ISR(TWI_vect){
