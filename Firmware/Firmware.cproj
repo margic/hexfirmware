@@ -109,10 +109,10 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Firmware.c">
+    <Compile Include="firmware.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="i2cslave.h">
+    <Compile Include="firmware.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
