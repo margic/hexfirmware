@@ -10,10 +10,12 @@
 #include <util/twi.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-#include "i2cslave.h"
+#include "firmware.h"
 
 void PWM_init(void);
 void TWI_init(void);
+
+define 
 
 int main(void)
 {
