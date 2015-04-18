@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectVersion>6.1</ProjectVersion>
+    <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
     <ProjectGuid>{63185d6e-4c38-43f1-a3cc-9e8feefd368a}</ProjectGuid>
     <avrdevice>ATmega328</avrdevice>
@@ -39,19 +39,20 @@
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
     <com_atmel_avrdbg_tool_simulator>
-      <ToolOptions xmlns="">
+      <ToolOptions>
         <InterfaceProperties>
-          <JtagEnableExtResetOnStartSession>false</JtagEnableExtResetOnStartSession>
         </InterfaceProperties>
         <InterfaceName>
         </InterfaceName>
       </ToolOptions>
-      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
-      <ToolNumber xmlns="">
+      <ToolType>com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber>
       </ToolNumber>
-      <ToolName xmlns="">Simulator</ToolName>
+      <ToolName>Simulator</ToolName>
     </com_atmel_avrdbg_tool_simulator>
-    <StimuliFile>C:\Users\Paul\Documents\Atmel Studio\6.1\Firmware\Firmware\sample.stim</StimuliFile>
+    <StimuliFile>C:\Users\Paul\Documents\GitHub\hexfirmware\Firmware\sample.stim</StimuliFile>
+    <preserveEEPROM>true</preserveEEPROM>
+    <avrtoolinterface />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
