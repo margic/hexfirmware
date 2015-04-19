@@ -11,8 +11,8 @@
 // Should fire interrupt in firmware on change
 #160000
 $repeat 10000000
-		PORTB |= 1
+		PINB |= 1
 		#12000
-		PORTB = 0
+		PINB = 0
 		#148000
 $endrep

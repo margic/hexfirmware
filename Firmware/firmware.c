@@ -23,18 +23,17 @@ int main(void)
 {
 	plex = 0;
 
-	DDRD = 0xFF;
+	DDRD = 0xFF; //set port d for all output
 	// PORTD &= ~(1 << PD0); // PD0 goes low
 	// PORTD |= (1 << PD0); // PD0 goes high
 	// set portd pin that is driving the multiplexer
-	
-	PORTD |= (1 << PLEXE); // turns off multiplexer
 	PORTD |= (1 << PLEXS0);
 	
 	PWM_init();
 	TWI_init();
 	// allow interrupts
 	//sei();
+	PORTD |= (1 << PLEXE); // turns on multiplexer
 	SREG |= (1 << SREG_I);	
 	while(1)
     {
@@ -45,7 +44,9 @@ int main(void)
 void PWM_init(void){
 	// initialize pwm reader on port b
 	// set pin 0 or port b as input pin
-	DDRB |= (1<<PINB0);	
+	DDRB &= ~(1<<PINB0);	
+	// set pin0 tri state
+	PORTB &= ~(1<<PINB0);
 	// enable pin change interrupt PCINT0-7
 	// PCICR |= (1<<PCIE0); // replace with input capture
 	// set pin 0 individually
@@ -79,7 +80,7 @@ void TWI_stop(void){
 ISR(TIMER1_CAPT_vect){
 	// Input capture interrupt handler
 	// first time is triggered in leading edge
-	if(PORTB & (0b00000001)){ // pin high 
+	if(PINB & (0b00000001)){ // pin high 
 		// clear counter and set to trailing edge
 		TCNT1 = 0;
 		TCCR1B &= ~(1<<ICES1);
