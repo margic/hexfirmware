@@ -1,0 +1,36 @@
+﻿------ Build started: Project: Firmware, Configuration: Debug AVR ------
+Build started.
+Project "Firmware.cproj" (default targets):
+Target "PreBuildEvent" skipped, due to false condition; ('$(PreBuildEvent)'!='') was evaluated as (''!='').
+Target "CoreBuild" in file "C:\Program Files (x86)\Atmel\Atmel Studio 6.2\Vs\Compiler.targets" from project "C:\Users\Paul\Documents\GitHub\hexfirmware\Firmware\Firmware.cproj" (target "Build" depends on it):
+	Task "RunCompilerTask"
+		Shell Utils Path C:\Program Files (x86)\Atmel\Atmel Studio 6.2\shellUtils
+		C:\Program Files (x86)\Atmel\Atmel Studio 6.2\shellUtils\make.exe all 
+		Building file: .././firmware.c
+		Invoking: AVR/GNU C Compiler : 4.8.1
+		"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe"  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=8000000  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328 -c -std=gnu99 -MD -MP -MF "firmware.d" -MT"firmware.d" -MT"firmware.o"   -o "firmware.o" ".././firmware.c" 
+		Finished building: .././firmware.c
+		Building target: Firmware.elf
+		Invoking: AVR/GNU Linker : 4.8.1
+		"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe" -o Firmware.elf  firmware.o   -Wl,-Map="Firmware.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega328  
+		Finished building target: Firmware.elf
+		"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Firmware.elf" "Firmware.hex"
+		"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Firmware.elf" "Firmware.eep" || exit 0
+		"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Firmware.elf" > "Firmware.lss"
+		"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Firmware.elf" "Firmware.srec"
+		"C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-size.exe" "Firmware.elf"
+		   text	   data	    bss	    dec	    hex	filename
+		    642	      0	    524	   1166	    48e	Firmware.elf
+	Done executing task "RunCompilerTask".
+	Task "RunOutputFileVerifyTask"
+				Program Memory Usage 	:	642 bytes   2.0 % Full
+				Data Memory Usage 		:	524 bytes   25.6 % Full
+	Done executing task "RunOutputFileVerifyTask".
+Done building target "CoreBuild" in project "Firmware.cproj".
+Target "PostBuildEvent" skipped, due to false condition; ('$(PostBuildEvent)' != '') was evaluated as ('' != '').
+Target "Build" in file "C:\Program Files (x86)\Atmel\Atmel Studio 6.2\Vs\Avr.common.targets" from project "C:\Users\Paul\Documents\GitHub\hexfirmware\Firmware\Firmware.cproj" (entry point):
+Done building target "Build" in project "Firmware.cproj".
+Done building project "Firmware.cproj".
+
+Build succeeded.
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========

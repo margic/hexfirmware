@@ -9,7 +9,7 @@
 // number of cycles for 1.5ms pulse center is 12,000
 // pin should be on for 12,000 then off for 148,000
 // Should fire interrupt in firmware on change
-#160000
+
 $repeat 10000000
 		PINB |= 1
 		#12000

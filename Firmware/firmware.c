@@ -14,6 +14,7 @@
 
 void PWM_init(void);
 void TWI_init(void);
+void plex_init(void);
 
 //define variables to store channel samples samples
 uint_fast16_t channels[NUMCHANNELS];
@@ -21,24 +22,28 @@ uint8_t plex;
 
 int main(void)
 {
-	plex = 0;
-
-	DDRD = 0xFF; //set port d for all output
-	// PORTD &= ~(1 << PD0); // PD0 goes low
-	// PORTD |= (1 << PD0); // PD0 goes high
-	// set portd pin that is driving the multiplexer
-	PORTD |= (1 << PLEXS0);
-	
 	PWM_init();
 	TWI_init();
+	plex_init();
 	// allow interrupts
 	//sei();
-	PORTD |= (1 << PLEXE); // turns on multiplexer
+
 	SREG |= (1 << SREG_I);	
 	while(1)
     {
 		//loop
     }
+}
+
+void plex_init(){
+	// do all the prep for multiplexer
+	plex = 0;
+
+	DDRD = 0xFF; //set port d for all output
+		// set portd pin that is driving the multiplexer
+	PORTD = (1 << PLEXE); // set port d to bit plex e on that disables multiplex
+	PORTD &= ~(1 << PLEXS0);
+	PORTD &= ~(1 << PLEXE); // turns on multiplexer
 }
 
 void PWM_init(void){
@@ -80,7 +85,7 @@ void TWI_stop(void){
 ISR(TIMER1_CAPT_vect){
 	// Input capture interrupt handler
 	// first time is triggered in leading edge
-	if(PINB & (0b00000001)){ // pin high 
+	if(PINB & (0x01)){ // pin high 
 		// clear counter and set to trailing edge
 		TCNT1 = 0;
 		TCCR1B &= ~(1<<ICES1);
