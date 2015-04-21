@@ -6,13 +6,13 @@
 // For more information on the format, see http://www.atmel.no/webdoc/simulator/simulator.wb_Simulator2_Stimuli.html
 //
 // total time for 50 hz pulse rate 8MHz is 160,000 cycles
-// number of cycles for 1.5ms pulse center is 12,000
-// pin should be on for 12,000 then off for 148,000
+// number of cycles for 1.5ms pulse center is 1,500
+// pin should be on for 1,500 then off for 18,500
 // Should fire interrupt in firmware on change
 
 $repeat 10000000
 		PINB |= 1
-		#12000
+		#1500
 		PINB = 0
-		#148000
+		#18500
 $endrep

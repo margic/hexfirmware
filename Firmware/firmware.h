@@ -9,6 +9,7 @@
 #ifndef I2CSLAVE_H_
 #define I2CSLAVE_H_
 
+#define PIEVENT PIND4
 #define PLEXE PIND3
 #define PLEXS0 PIND0
 #define PLEXS1 PIND1

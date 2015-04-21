@@ -19,6 +19,7 @@ void plex_init(void);
 //define variables to store channel samples samples
 uint_fast16_t channels[NUMCHANNELS];
 uint8_t plex;
+uint8_t updatedCount;
 
 int main(void)
 {
@@ -92,8 +93,17 @@ ISR(TIMER1_CAPT_vect){
 	}else{
 		// get counter from ICR1
 		// reset to look for leading edge
-		channels[plex] = ICR1;
+		uint_fast16_t counter = ICR1 + 47; // add some counts for processor over head //
+		if(channels[plex] != counter){
+			updatedCount += 1;
+		}
+		channels[plex] = counter; 
+		
 		if(plex == NUMCHANNELS - 1){
+			if(updatedCount != 0){
+				PORTD |= (1 << PIEVENT);
+			}
+			updatedCount = 0;
 			plex = 0;
 		}else{
 			plex += 1;
